@@ -10,7 +10,7 @@ router.get('/api/meetingRooms', async (req, res) => {
     const { locationId } = req.query;
   
     try {
-      const result = await db.query('SELECT * FROM meeting_rooms WHERE location_id = $1', [locationId]);
+      const result = await db.query('SELECT * FROM project_canteen.meeting_rooms WHERE location_id = $1', [locationId]);
       const meetingRooms = result.rows;
       res.json(meetingRooms);
     } catch (error) {

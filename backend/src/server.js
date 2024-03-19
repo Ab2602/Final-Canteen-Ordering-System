@@ -26,6 +26,8 @@ app.use('/hot-snacks',itemRoutes);
 app.use('/beverages',itemRoutes);
 app.use('/munchies',itemRoutes);
 app.use('/orders',orderRoutes);
+app.use('/auth', authRoutes);
+app.use('/admin',itemRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
