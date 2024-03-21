@@ -149,6 +149,7 @@ const profile = async (req, res) => {
   }
 
 }
+
 const admin_login = async (req, res ) => {
   try{
       const { username, password } = req.body;
@@ -180,4 +181,15 @@ const admin_login = async (req, res ) => {
   }
 }
 
-module.exports = { register, login, getLocations, getHotSnacks, getBeverages, getMunchies, placeOrder, profile, admin_login};
+const my_orders = async (req, res) =>{
+  const userId = req.query.user_id;
+  try {
+    const orders = await db.query('SELECT * FROM project_canteen.order_details WHERE user_id = $1', [userId]);
+    res.json(orders.rows);
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+module.exports = { register, login, getLocations, getHotSnacks, getBeverages, getMunchies, placeOrder, profile, admin_login, my_orders};

@@ -5,7 +5,6 @@ const userRoutes = require('./routes/userRoutes');
 const locationRoutes = require('./routes/locationRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-const db = require('./db/db');
 const { authenticateToken } = require('./middleware/authMiddleware');
 
 const app = express();
@@ -28,6 +27,7 @@ app.use('/munchies',itemRoutes);
 app.use('/orders',orderRoutes);
 app.use('/auth', authRoutes);
 app.use('/admin',itemRoutes);
+app.use('/orders', orderRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
