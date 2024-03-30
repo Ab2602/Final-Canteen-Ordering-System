@@ -106,7 +106,7 @@ const getMunchies = async (req,res)=>{
 
 const placeOrder = async (req, res) => {
   const { orderId, userId, data, dateTime, prepInstructions, expectedTime, mobileNumber, paymentType, roomId, locationId, stage } = req.body;
-
+  console.log
   try {
     const queryText = 'INSERT INTO project_canteen.order_details (order_id, user_id, data, date_time, prep_instructions, expected_time, mobile_number, payment_type, room_id, location_id, stage) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
     const values = [orderId, userId, data, dateTime, prepInstructions, expectedTime, mobileNumber, paymentType, roomId, locationId, stage];
@@ -192,4 +192,15 @@ const my_orders = async (req, res) =>{
   }
 }
 
-module.exports = { register, login, getLocations, getHotSnacks, getBeverages, getMunchies, placeOrder, profile, admin_login, my_orders};
+const cancel_orders = async (req, res) =>{
+  const orderId = req.query.orderId;
+  try {
+    const orders = await db.query('SELECT * FROM project_canteen.order_details WHERE user_id = $1', [orderId]);
+    res.json(orders.rows);
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+module.exports = { register, login, getLocations, getHotSnacks, getBeverages, getMunchies, placeOrder, profile, admin_login, my_orders, cancel_orders};
