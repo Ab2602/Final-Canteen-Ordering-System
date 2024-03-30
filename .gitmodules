@@ -1,0 +1,3 @@
+[submodule "frontend-user"]
+	path = frontend-user
+	url = https://github.com/Ab2602/Final-Canteen-Ordering-System.git
